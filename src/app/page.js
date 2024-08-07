@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import styles from "./page.module.css";
+import './globals.css'
 import { useEffect, useState } from "react";
 import { Boton } from "./components/Boton/page";
 
@@ -41,16 +42,16 @@ export default function Home() {
       setMensaje('¡Correcto!');
     } else {
       setPuntos(puntos - 1);
-      setMensaje('Incorrecto. Intenta de nuevo.');
+      setMensaje('Incorrecto.');
     }
     setInputValue('');
     setRandomIndex(Math.floor(Math.random() * paises.length));
   };
 
   return (
-    <>
+    <main>
       <div>
-        <h1>Adivina la bandera!</h1>
+        <h1>Adivina el país!</h1>
         {paisRandom && (
           <>
             <Image src={paisRandom.flag} alt={paisRandom.name} width={200} height={100}/>
@@ -68,6 +69,6 @@ export default function Home() {
         <h2>Puntos: {puntos}</h2>
         {mensaje && <p>{mensaje}</p>}
       </div>
-    </>
+    </main>
   );
 }
