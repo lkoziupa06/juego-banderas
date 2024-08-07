@@ -9,24 +9,25 @@ export default function Home() {
   const [randomIndex, setRandomIndex] = useState(null);
 
   useEffect(()=>{
-    fetch(urlApi)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      if (data.data && data.data.length > 0) {
+    const fetchPaises = async () => {
+      try {
+        const response = await fetch(urlApi);
+        const data = await response.json();
         setPaises(data.data);
-        setRandomIndex(Math.floor(Math.random() * data.data.length));
+        if (data.data.length > 0) {
+          setRandomIndex(Math.floor(Math.random() * data.data.length));
+        }
+      } catch (error) {
+        console.error('Hubo un error: ', error);
       }
-    })
-    .catch(error => console.log('Hubo un error: ' + error))
+    };
+    
+    fetchPaises();
   }, [])
 
-  const randomCountry = paises[randomIndex];
   return (
     <>
-      <div>
-          <Image src={randomCountry.flag} alt={`Flag of ${randomCountry.name}`} width={50} height={30}/>
-      </div>
+
     </>
   );
 }
