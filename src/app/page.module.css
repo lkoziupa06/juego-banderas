@@ -13,8 +13,7 @@
     color:white;
     border: #288A8E;
     border-radius: 2px;
-    cursor: pointer;
-    flex: 1;
+    margin-left: 10px;
 }
 
 .input{
@@ -23,6 +22,7 @@
     border: 1px solid #ced4da;
     border-radius: 4px;
     margin-right: 10px; 
+    height: 50px;
 }
 
 .imageContainer{
@@ -33,8 +33,8 @@
 .inputContainer{
     display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
-    width: 500px; 
     margin: 20px 0;
 }
 
