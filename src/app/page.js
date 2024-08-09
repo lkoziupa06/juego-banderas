@@ -51,18 +51,17 @@ export default function Home() {
   return (
     <main>
       <div>
-        <h1>Adivina el país!</h1>
+        <h1 className= {styles.title}>Adivina el país!</h1>
         {paisRandom && (
           <>
-            <Image src={paisRandom.flag} alt={paisRandom.name} width={200} height={100}/>
-            <div>
-            <input 
-              type="text" 
-              value={inputValue} 
-              onChange={handleInputChange} 
-              placeholder="Introduce el nombre del país" 
-            />
-            <Boton onClick={verificarRespuesta} label="Verificar"/>
+            <div className={styles.imageContainer}>
+              <Image src={paisRandom.flag} alt={paisRandom.name} width={500} height={300}/>
+            </div>
+            <div className={styles.inputContainer}>
+              <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Introduce el nombre del país"/>
+              <Boton style={styles.boton} onClick={verificarRespuesta} label="Verificar"/>
+            </div>
+            <div className={styles.botonesContainer}>
             </div>
           </>
         )}

@@ -1,3 +1,8 @@
 html{
-    background-color: #79a0c7;
+    background-color: #FFFDF5;
+}
+
+div{
+    flex: 1;
+    align-items: center;
 }

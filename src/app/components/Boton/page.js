@@ -1,3 +1,3 @@
-export const Boton = ({onClick, label}) =>{
-    return <button onClick={onClick}>{label}</button>
+export const Boton = ({onClick, label, style}) =>{
+    return <button className={style} onClick={onClick}>{label}</button>
 }
