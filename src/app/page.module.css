@@ -1,19 +1,26 @@
 .title{
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-bottom: 15px;
+    margin-top: 10px;
     font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-
+    font-weight: bold;
+    color:white;
+    font-size: 2em;
 }
 
 .boton{
-    background-color: #288A8E;
-    color:white;
-    border: #288A8E;
-    border-radius: 2px;
-    margin-left: 10px;
+    display: block;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px 10px;
+}
+.boton:hover{
+    background-color: #0056b3;
 }
 
 .input{
@@ -21,8 +28,8 @@
     margin-bottom: 10px;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    margin-right: 10px; 
-    height: 50px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .imageContainer{
@@ -32,13 +39,21 @@
 
 .inputContainer{
     display: flex;
-    align-items: center;
-    text-align: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .botonesContainer{
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.headerContainer {
+    display: flex;
+    align-items: center;
+    text-align: center;       
+    justify-content: space-between; 
+    gap: 20px;                 
+    padding: 10px;            
+}

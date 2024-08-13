@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image";
+import Link from "next/image";
 import styles from "./page.module.css";
 import './globals.css'
 import { useEffect, useState } from "react";
@@ -12,7 +13,8 @@ export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [puntos, setPuntos] = useState(0);
   const [mensaje, setMensaje] = useState('');
-
+  const [tiempoRestante, setTiempoRestante] = useState(15);
+  const [timerActivo, setTimerActivo] = useState(true);
   useEffect(()=>{
     const fetchPaises = async () => {
       try {
@@ -41,31 +43,52 @@ export default function Home() {
       setPuntos(puntos + 10);
       setMensaje('¡Correcto!');
     } else {
-      setPuntos(puntos - 1);
+      if(puntos != 0){
+        setPuntos(puntos - 1);
+      }
       setMensaje('Incorrecto.');
     }
     setInputValue('');
     setRandomIndex(Math.floor(Math.random() * paises.length));
   };
 
+  useEffect(() => {
+    let timer;
+    if(timerActivo){
+      timer = setInterval(() => {
+        setTiempoRestante((prev) => prev - 1);
+      }, 1000);
+    }else if(tiempoRestante <= 0){
+      timer = setInterval(() => {
+        setPuntos((prev) => prev - 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  },[tiempoRestante, timerActivo]);
+
   return (
     <main>
       <div>
-        <h1 className= {styles.title}>Adivina el país!</h1>
+        <div className={styles.headerContainer}>
+          <h1 className={styles.title}>PUNTOS: {puntos}</h1>
+          <h1 className= {styles.title}>ADIVINA EL PAIS!</h1>
+          <h1 className= {styles.title}>HIGHSCORES!</h1>
+        </div>
         {paisRandom && (
           <>
+            <p>Tiempo restante: {tiempoRestante > 0 ? tiempoRestante : 0} segundos</p>
             <div className={styles.imageContainer}>
               <Image src={paisRandom.flag} alt={paisRandom.name} width={500} height={300}/>
             </div>
             <div className={styles.inputContainer}>
-              <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Introduce el nombre del país"/>
-              <Boton style={styles.boton} onClick={verificarRespuesta} label="Verificar"/>
+              <input className={styles.input}type="text" value={inputValue} onChange={handleInputChange} placeholder="Introduce el nombre del país"/>
             </div>
             <div className={styles.botonesContainer}>
+              <Boton style={styles.boton} onClick={verificarRespuesta} label="VERIFICAR"/>
             </div>
           </>
         )}
-        <h2>Puntos: {puntos}</h2>
         {mensaje && <p>{mensaje}</p>}
       </div>
     </main>
