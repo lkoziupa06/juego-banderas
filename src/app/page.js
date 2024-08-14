@@ -15,6 +15,7 @@ export default function Home() {
   const [mensaje, setMensaje] = useState('');
   const [tiempoRestante, setTiempoRestante] = useState(15);
   const [timerActivo, setTimerActivo] = useState(true);
+  const [letrasReveladas, setLetrasReveladas] = useState([]);
    
   useEffect(()=>{
     const fetchPaises = async () => {
@@ -53,6 +54,7 @@ export default function Home() {
     setRandomIndex(Math.floor(Math.random() * paises.length));
     setTiempoRestante(15);
     setTimerActivo(true);
+    setLetrasReveladas([]);
   };
 
   useEffect(() => {
@@ -76,6 +78,28 @@ export default function Home() {
     }
   }, [tiempoRestante]);
 
+  const revelarLetra = () => {
+    if (paisRandom && tiempoRestante > 2) {
+      const letrasSinRevelar = paisRandom.name.split('').filter((letra, index) => !letrasReveladas.includes(index));
+      if (letrasSinRevelar.length > 0) {
+        const indiceAleatorio = Math.floor(Math.random() * letrasSinRevelar.length);
+        const nuevaLetraRevelada = paisRandom.name.indexOf(letrasSinRevelar[indiceAleatorio]);
+        setLetrasReveladas([...letrasReveladas, nuevaLetraRevelada]);
+        setTiempoRestante(tiempoRestante - 2);
+      }
+    }
+  };
+  
+  const mostrarNombreConAyuda = () => {
+    if (paisRandom) {
+      return paisRandom.name.split('').map((letra, index) => (
+        letrasReveladas.includes(index) ? letra : '_'
+      )).join(' ');
+    }
+    return '';
+  };
+  
+
   return (
     <main>
       <div>
@@ -94,11 +118,13 @@ export default function Home() {
             <div className={styles.imageContainer}>
               <Image src={paisRandom.flag} alt={paisRandom.name} width={500} height={300}/>
             </div>
+            <h2 className={styles.title}>{mostrarNombreConAyuda()}</h2>
             <div className={styles.inputContainer}>
               <input className={styles.input}type="text" value={inputValue} onChange={handleInputChange} placeholder="Introduce el nombre del país"/>
             </div>
             <div className={styles.botonesContainer}>
               <Boton style={styles.boton} onClick={verificarRespuesta} label="VERIFICAR"/>
+              <Boton style={styles.boton} onClick={revelarLetra} label="AYUDA"/>
             </div>
           </>
         )}

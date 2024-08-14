@@ -10,7 +10,6 @@
 
 .boton{
     display: block;
-    padding: 10px;
     background-color: #007bff;
     color: #ffffff;
     border: none;
@@ -19,6 +18,7 @@
     font-size: 16px;
     font-weight: 550;
     padding: 6px 10px;
+    margin: 5px;
 }
 .boton:hover{
     background-color: #0056b3;
@@ -46,8 +46,8 @@
 
 .botonesContainer{
     display: flex;
-    align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
 .headerContainer {
@@ -65,17 +65,17 @@
     border-radius: 4px;
     font-weight: bold;
     font-size: 1.2em;
-    max-width: 500px; /* Ancho máximo para el mensaje */
+    max-width: 500px; 
     margin-left: auto;
     margin-right: auto;
 }
 
 .mensajeCorrecto {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745; 
     color: white;
 }
 
 .mensajeIncorrecto {
-    background-color: #dc3545; /* Rojo */
+    background-color: #dc3545; 
     color: white;
 }
