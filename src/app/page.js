@@ -15,6 +15,7 @@ export default function Home() {
   const [mensaje, setMensaje] = useState('');
   const [tiempoRestante, setTiempoRestante] = useState(15);
   const [timerActivo, setTimerActivo] = useState(true);
+   
   useEffect(()=>{
     const fetchPaises = async () => {
       try {
@@ -50,6 +51,8 @@ export default function Home() {
     }
     setInputValue('');
     setRandomIndex(Math.floor(Math.random() * paises.length));
+    setTiempoRestante(15);
+    setTimerActivo(true);
   };
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export default function Home() {
       timer = setInterval(() => {
         setTiempoRestante((prev) => prev - 1);
       }, 1000);
-    }else if(tiempoRestante <= 0){
+    }else if(tiempoRestante <= 0 && puntos != 0){
       timer = setInterval(() => {
         setPuntos((prev) => prev - 1);
       }, 1000);
@@ -67,17 +70,27 @@ export default function Home() {
     return () => clearInterval(timer);
   },[tiempoRestante, timerActivo]);
 
+  useEffect(() => {
+    if (tiempoRestante <= 0) {
+      setTimerActivo(false);
+    }
+  }, [tiempoRestante]);
+
   return (
     <main>
       <div>
+        {mensaje && (
+          <p className={`${styles.mensaje} ${mensaje === '¡Correcto!' ? styles.mensajeCorrecto : styles.mensajeIncorrecto}`}>
+            {mensaje}
+          </p>
+        )}
         <div className={styles.headerContainer}>
           <h1 className={styles.title}>PUNTOS: {puntos}</h1>
           <h1 className= {styles.title}>ADIVINA EL PAIS!</h1>
-          <h1 className= {styles.title}>HIGHSCORES!</h1>
+          <h1 className= {styles.title}>TIEMPO: {tiempoRestante > 0 ? tiempoRestante : 0}</h1>
         </div>
         {paisRandom && (
           <>
-            <p>Tiempo restante: {tiempoRestante > 0 ? tiempoRestante : 0} segundos</p>
             <div className={styles.imageContainer}>
               <Image src={paisRandom.flag} alt={paisRandom.name} width={500} height={300}/>
             </div>
@@ -89,7 +102,6 @@ export default function Home() {
             </div>
           </>
         )}
-        {mensaje && <p>{mensaje}</p>}
       </div>
     </main>
   );

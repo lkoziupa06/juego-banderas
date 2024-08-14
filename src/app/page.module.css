@@ -17,6 +17,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 550;
     padding: 6px 10px;
 }
 .boton:hover{
@@ -56,4 +57,25 @@
     justify-content: space-between; 
     gap: 20px;                 
     padding: 10px;            
+}
+.mensaje {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.2em;
+    max-width: 500px; /* Ancho máximo para el mensaje */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mensajeCorrecto {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.mensajeIncorrecto {
+    background-color: #dc3545; /* Rojo */
+    color: white;
 }
